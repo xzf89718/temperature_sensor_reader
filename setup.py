@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 
-VERSION = '1.0.0'
+VERSION = '1.0.2'
 
 setup(
     name='modbus_configuretools',  # package name
@@ -12,7 +12,7 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     license="The MIT License",
-    install_requires=["numpy", "pymodbus"],
+    install_requires=["numpy", "pymodbus", "pyserial", "pyserial-asyncio"],
     author="XU Zifeng",
     author_email="zifeng.xu@foxmail.com"
 )
