@@ -1,7 +1,14 @@
 # temperature_sensor_reader
-This is a temperature sensor package designed for modbus. Implemented in pymodbus only.
-
+This is a temperature sensor package designed for modbus. Implemented in pymodbus only. PyPI website: https://pypi.org/project/modbus-configuretools-xzf8971/
+## Install
+from pypi:  
+pip install modbus-configuretools-xzf8971  
+from github:  
+pip install git+https://github.com/xzf89718/temperature_sensor_reader
 ## Jiandarenke modbus RS485 as example  
+## Before run scripts
+Check the COM and chmod  
+chmod 666 \dev\ttyUSBx  
 ### Import modules  
 from modbus_configuretools import temperature_sensor.RS485_Jiandarenke as RS485_JDRK  
 from modbus_configuretools import temperature_sensor.JDRKAddressConfig as Config
