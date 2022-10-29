@@ -1,0 +1,17 @@
+from setuptools import setup
+from setuptools import find_packages
+
+
+VERSION = '1.0.0'
+
+setup(
+    name='modbus_configuretools',  # package name
+    version=VERSION,  # package version
+    description='A package to read/write registers on a temperature sensor with python.',  # package description
+    packages=find_packages(),
+    zip_safe=False,
+    license="The MIT License",
+    requires=["numpy", "pymodbus"],
+    author="XU Zifeng",
+    author_email="zifeng.xu@foxmail.com"
+)
