@@ -11,7 +11,7 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     license="The MIT License",
-    requires=["numpy", "pymodbus"],
+    install_requires=["numpy", "pymodbus"],
     author="XU Zifeng",
     author_email="zifeng.xu@foxmail.com"
 )
