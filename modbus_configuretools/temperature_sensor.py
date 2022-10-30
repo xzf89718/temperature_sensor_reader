@@ -1,5 +1,3 @@
-from curses import baudrate
-import modbus_configuretools
 from modbus_configuretools.derived_modbus_wrapper import PyModbusWrapper
 from modbus_configuretools.helper_function import encodeint16, decodeint16, decode_16bit_complemental_code, calculate_temperature_and_humidity
 import numpy as np
