@@ -3,34 +3,9 @@
 
 from modbus_configuretools.modbus_wrapper import ModbusWrapper
 from pymodbus.client import ModbusSerialClient as ModbusClient
+from modbus_configuretools.helper_function import check_is_port_connected, check_result
 
 
-def check_is_port_connected(func):
-    def wrapper(self, *args, **kwargs):
-        if (self.is_port_connected == False):
-            print(
-                "check_is_port_connected WARNING The port {0} is not connected.\nThe program will continue, but the temperature and humidity can't be recorded.".format(self.port))
-            return False
-        else:
-            func(self, *args, **kwargs)
-            return True
-    return wrapper
-
-
-def check_result(func):
-    def wrapper(self, *args, **kwargs):
-        func(self, *args, **kwargs)
-        if (self.CheckResult() is None):
-            print(
-                "check_isError WARNING _result is None. Read/Write registers first before check_isError.\nThe program will continue, but the temperature and humidity can't be recorded.")
-            return False
-        if (self.CheckResult() == False):
-            print(
-                "check_isError WARNING Read/Write registers is not correct.\nThe program will continue, but the temperature and humidity can't be recorded.")
-            return False
-        else:
-            return True
-    return wrapper
 
 
 class PyModbusWrapper(ModbusWrapper):
