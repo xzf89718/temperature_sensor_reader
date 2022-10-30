@@ -2,9 +2,13 @@
 This is a temperature sensor package designed for modbus. Implemented in pymodbus only. PyPI website: https://pypi.org/project/modbus-configuretools-xzf8971/
 ## Install
 from pypi:  
+```bash
 pip install modbus-configuretools-xzf8971  
+```
 from github:  
+```bahs
 pip install git+https://github.com/xzf89718/temperature_sensor_reader
+```
 ## Jiandarenke modbus RS485 as example  
 ### Before run scripts
 Check the COM and chmod  
