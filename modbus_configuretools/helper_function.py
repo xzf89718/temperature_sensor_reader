@@ -1,11 +1,24 @@
 # helper function for modbus_configuretools
 import numpy as np
+# logging setting
+import logging
+logger_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s"
+logging.basicConfig(filename='modbus_configuretools.log', level=logging.INFO,
+                    format="%(asctime)s - %(name)s - %(levelname)s -%(funcName)s - %(message)s")
+handler_console = logging.StreamHandler()
+handler_console.setLevel("INFO")
+handler_console.setFormatter(logger_fmt)
+logger = logging.getLogger("modbus_configuretools")
+logger.addHandler(handler_console)
+
 # helper function for derived_modbus_wrapper
+
+
 def check_is_port_connected(func):
     def wrapper(self, *args, **kwargs):
         if (self.is_port_connected == False):
-            print(
-                "check_is_port_connected WARNING The port {0} is not connected.\nThe program will continue, but the temperature and humidity can't be recorded.".format(self.port))
+            logger.error(
+                "The port {0} is not connected.\nThe program will continue, but the temperature and humidity can't be recorded.".format(self.port))
             return False
         else:
             func(self, *args, **kwargs)
@@ -17,18 +30,20 @@ def check_result(func):
     def wrapper(self, *args, **kwargs):
         func(self, *args, **kwargs)
         if (self.CheckResult() is None):
-            print(
-                "check_isError WARNING _result is None. Read/Write registers first before check_isError.\nThe program will continue, but the temperature and humidity can't be recorded.")
+            logger.error(
+                "_result is None. Read/Write registers first before check_isError.\nThe program will continue, but the temperature and humidity can't be recorded.")
             return False
         if (self.CheckResult() == False):
-            print(
-                "check_isError WARNING Read/Write registers is not correct.\nThe program will continue, but the temperature and humidity can't be recorded.")
+            logger.error(
+                "Read/Write registers is not correct.\nThe program will continue, but the temperature and humidity can't be recorded.")
             return False
         else:
             return True
     return wrapper
 
 # helper function for temperature_sensor
+
+
 def decode_16bit_complemental_code(func):
     def wrapper(self, *args, **kwargs):
         # This values shoud be a list
@@ -77,4 +92,3 @@ def encodeint16(value):
         # only on system with more than 16 bits
         decode_value = int("0b1" + bin(int(_decode_value, 2) + 1)[-15:], 2)
         return decode_value
-    
