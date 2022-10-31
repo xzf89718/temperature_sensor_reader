@@ -4,8 +4,8 @@
 from modbus_configuretools.modbus_wrapper import ModbusWrapper
 from pymodbus.client import ModbusSerialClient as ModbusClient
 from modbus_configuretools.helper_function import check_is_port_connected, check_result
-
-
+import logging
+logger = logging.getLogger("modbus_configuretools")
 
 
 class PyModbusWrapper(ModbusWrapper):
@@ -18,7 +18,7 @@ class PyModbusWrapper(ModbusWrapper):
                                     parity=self.parity, stopbits=self.stopbits, bytesize=self.bytesize, baudrate=self.baudrate, timeout=self.timeout)
         self.is_port_connected = self._client.connect()
         if (self.is_port_connected is False):
-            print("PyModbusWrapper WARNING Fail to connect client.")
+            logger.error("Fail to connect client.")
 
         return self.is_port_connected
 
