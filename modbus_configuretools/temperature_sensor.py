@@ -1,8 +1,6 @@
 from modbus_configuretools.derived_modbus_wrapper import PyModbusWrapper
-from modbus_configuretools.helper_function import encodeint16, decodeint16, decode_16bit_complemental_code, calculate_temperature_and_humidity
+from modbus_configuretools.helper_function import encodeint16, decodeint16, decode_16bit_complemental_code, calculate_temperature_and_humidity, modbus_configuretools_logger
 import numpy as np
-import logging
-logger = logging.getLogger("modbus_configuretools")
 ADDRESS_HUMIDITY = 0x0000
 ADDRESS_TEMPERATURE_DEW_POINT = 0x0001
 ADDRESS_TEMPERATURE = 0x0002
@@ -58,11 +56,11 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.WriteRegisgers(JDRK_config.ADDRESS_TEMPERATURE_CALI, [
                                          encodeint16(JDRK_config.TEMPERATURE_CALI)], JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to write Temperture Calibtration register")
+            modbus_configuretools_logger.warning("Fail to write Temperture Calibtration register")
         is_success = self.WriteRegisgers(
             JDRK_config.ADDRESS_HUMUDITY_CALI, [encodeint16(JDRK_config.ADDRESS_HUMUDITY_CALI)], JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to write Humidity Calibtration register")
+            modbus_configuretools_logger.warning("Fail to write Humidity Calibtration register")
 
     def DumpNonZeroRegisters(self, output_filename, begin_address, end_address, JDRK_config=jdrk_config):
         read_address = begin_address
@@ -74,7 +72,7 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.ReadHoldingRegisters(
             JDRK_config.ADDRESS_HUMIDITY, 3, JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to read Temperature and Humidity register")
+            modbus_configuretools_logger.warning("Fail to read Temperature and Humidity register")
             return []
         else:
             return [self.GetValueInResult()[2], self.GetValueInResult()[1], self.GetValueInResult()[0]]
@@ -85,7 +83,7 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.ReadHoldingRegisters(
             JDRK_config.ADDRESS_TEMPERATURE, 1, JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to read Temperature register")
+            modbus_configuretools_logger.warning("Fail to read Temperature register")
             return []
         else:
             return self.GetValueInResult()
@@ -96,7 +94,7 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.ReadHoldingRegisters(
             JDRK_config.ADDRESS_TEMPERATURE_DEW_POINT, 1, JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to read Temperature Dew Point register")
+            modbus_configuretools_logger.warning("Fail to read Temperature Dew Point register")
             return []
         else:
             return self.GetValueInResult()
@@ -107,7 +105,7 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.ReadHoldingRegisters(
             JDRK_config.ADDRESS_HUMIDITY, 1, JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to read Humidity register")
+            modbus_configuretools_logger.warning("Fail to read Humidity register")
             return []
         else:
             return self.GetValueInResult()
@@ -118,7 +116,7 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.ReadHoldingRegisters(
             JDRK_config.ADDRESS_TEMPERATURE_CALI, 2, JDRK_config)
         if (not is_success):
-            logger.error("Fail to read Temperature and Humidity register")
+            modbus_configuretools_logger.warning("Fail to read Temperature and Humidity register")
             return []
         else:
             return self.GetValueInResult()
@@ -127,7 +125,7 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.ReadHoldingRegisters(
             JDRK_config.ADDRESS_SLAVEID, 2, JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to read SlaveID and Baudrate register")
+            modbus_configuretools_logger.warning("Fail to read SlaveID and Baudrate register")
             return []
         else:
             return self.GetValueInResult()
@@ -137,16 +135,16 @@ class RS485_Jiandarenke(PyModbusWrapper):
         is_success = self.WriteRegisgers(
             JDRK_config.ADDRESS_SLAVEID, [JDRK_config.SLAVEID, JDRK_config.BAUDRATE], JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to write SlaveID and Baudrate register")
+            modbus_configuretools_logger.warning("Fail to write SlaveID and Baudrate register")
 
     def WriteSlaveID(self, JDRK_config=jdrk_config):
         is_success = self.WriteRegisgers(
             JDRK_config.ADDRESS_SLAVEID, [JDRK_config.SLAVEID], JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to write SlaveID register")
+            modbus_configuretools_logger.warning("Fail to write SlaveID register")
 
     def WriteBaudrate(self, JDRK_config=jdrk_config):
         is_success = self.WriteRegisgers(
             JDRK_config.ADDRESS_BAUDRATE, [JDRK_config.BAUDRATE], JDRK_config.SLAVEID)
         if (not is_success):
-            logger.error("Fail to write Baudrate register")
+            modbus_configuretools_logger.warning("Fail to write Baudrate register")

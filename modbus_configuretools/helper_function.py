@@ -2,23 +2,25 @@
 import numpy as np
 # logging setting
 import logging
-logger_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s"
-logging.basicConfig(filename='modbus_configuretools.log', level=logging.INFO,
-                    format="%(asctime)s - %(name)s - %(levelname)s -%(funcName)s - %(message)s")
+
+modbus_configuretools_logger = logging.getLogger("modbus_configuretools")
+modbus_configuretools_logger.setLevel(level=logging.WARNING)
+logger_fmt = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s")
+# logging.basicConfig(filename='modbus_configuretools.log', level=logging.INFO,
+#                     format="%(asctime)s - %(name)s - %(levelname)s -%(funcName)s - %(message)s")
 handler_console = logging.StreamHandler()
-handler_console.setLevel("INFO")
 handler_console.setFormatter(logger_fmt)
-logger = logging.getLogger("modbus_configuretools")
-logger.addHandler(handler_console)
+modbus_configuretools_logger.addHandler(handler_console)
+handler_file = logging.FileHandler("./modbus_configuretools.log")
+handler_file.setFormatter(logger_fmt)
+modbus_configuretools_logger.addHandler(handler_file)
 
 # helper function for derived_modbus_wrapper
-
-
 def check_is_port_connected(func):
     def wrapper(self, *args, **kwargs):
         if (self.is_port_connected == False):
-            logger.error(
-                "The port {0} is not connected.\nThe program will continue, but the temperature and humidity can't be recorded.".format(self.port))
+            modbus_configuretools_logger.warning(
+                "The port {0} is not connected. The program will continue, but the sensor is not connected.".format(self.port))
             return False
         else:
             func(self, *args, **kwargs)
@@ -30,11 +32,11 @@ def check_result(func):
     def wrapper(self, *args, **kwargs):
         func(self, *args, **kwargs)
         if (self.CheckResult() is None):
-            logger.error(
-                "_result is None. Read/Write registers first before check_isError.\nThe program will continue, but the temperature and humidity can't be recorded.")
+            modbus_configuretools_logger.warning(
+                "_result is None. Read/Write registers first before check_isError. The program will continue, but the temperature and humidity is not correct.")
             return False
         if (self.CheckResult() == False):
-            logger.error(
+            modbus_configuretools_logger.warning(
                 "Read/Write registers is not correct.\nThe program will continue, but the temperature and humidity can't be recorded.")
             return False
         else:
