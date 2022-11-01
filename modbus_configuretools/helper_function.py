@@ -4,10 +4,9 @@ import numpy as np
 import logging
 
 modbus_configuretools_logger = logging.getLogger("modbus_configuretools")
+modbus_configuretools_logger.propagate = False
 modbus_configuretools_logger.setLevel(level=logging.WARNING)
 logger_fmt = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s")
-# logging.basicConfig(filename='modbus_configuretools.log', level=logging.INFO,
-#                     format="%(asctime)s - %(name)s - %(levelname)s -%(funcName)s - %(message)s")
 handler_console = logging.StreamHandler()
 handler_console.setFormatter(logger_fmt)
 modbus_configuretools_logger.addHandler(handler_console)

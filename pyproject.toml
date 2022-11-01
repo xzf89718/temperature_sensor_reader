@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "numpy", "pyserial", "pyserial-asyncio", "pymodbus"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "modbus_configuretools_xzf8971"
-version = "1.2.0"
+version = "1.2.1"
 authors = [
   { name="Zifeng", email="zifeng.xu@foxmail.com" },
 ]
@@ -19,4 +19,4 @@ classifiers = [
 
 [project.urls]
 "Homepage" = "https://github.com/xzf89718/temperature_sensor_reader"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Bug Tracker" = "https://github.com/xzf89718/temperature_sensor_reader/issues"
