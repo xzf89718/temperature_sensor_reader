@@ -38,10 +38,14 @@ try:
         # Check if read temperature success
         if (len(temperature) > 0):
             temperature = temperature[0]
+        else:
+            temperature = "NULL"
         humidity = mysensor.ReadHumidity(JDRK_RS485_box_config)
         # Check if read humidity success
         if (len(humidity) > 0):
             humidity = humidity[0]
+        else:
+            humidity = "NULL"
         _message_to_write = "{0}\t{1}".format(
             temperature, humidity)
         JDRK_sensor_logger.info(_message_to_write)

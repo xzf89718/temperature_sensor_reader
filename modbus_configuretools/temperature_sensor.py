@@ -67,6 +67,7 @@ def check_and_retry_Jiandarenke(func):
         modbus_configuretools_logger.warning(
             "Fail read or write JDRK register after {0} times retry".format(RETRY_TIME))
         return []
+    return wrapper
 
 
 class RS485_Jiandarenke(PyModbusWrapper):
