@@ -34,17 +34,19 @@ mysensor.InitClient()
 
 try:
     while True:
-        # temperature, temperature_dewpoint, humidity = mysensor.ReadTemperatureAndHumidity(
-        #     JDRK_RS485_wangzike_config)
-        # _message_to_write = "{0}\t{1}\t{2}".format(
-        #     temperature, temperature_dewpoint, humidity)
-        temperature = mysensor.ReadTemperature(JDRK_RS485_box_config)[0]
-        humidity = mysensor.ReadHumidity(JDRK_RS485_box_config)[0]
+        temperature = mysensor.ReadTemperature(JDRK_RS485_box_config)
+        # Check if read temperature success
+        if (len(temperature) > 0):
+            temperature = temperature[0]
+        humidity = mysensor.ReadHumidity(JDRK_RS485_box_config)
+        # Check if read humidity success
+        if (len(humidity) > 0):
+            humidity = humidity[0]
         _message_to_write = "{0}\t{1}".format(
             temperature, humidity)
         JDRK_sensor_logger.info(_message_to_write)
         # Get temperature and humidity every 30s
         time.sleep(30)
 except KeyboardInterrupt as error:
-    JDRK_sensor_logger.warning("End write temperature into JDRK_sensor.log")
+    JDRK_sensor_logger.warning("End write temperature into log")
     mysensor.CloseClient()
