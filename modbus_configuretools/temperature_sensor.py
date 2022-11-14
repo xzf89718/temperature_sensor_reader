@@ -55,10 +55,10 @@ jdrk_config = JDRKAddressConfig(ADDRESS_HUMIDITY, ADDRESS_TEMPERATURE_DEW_POINT,
 def check_and_retry_Jiandarenke(func):
     def wrapper(self, *args, **kwargs):
         result = func(self, *args, **kwargs)
-        time.sleep(JDRK_NORMAL_DELAY)
         if (len(result) > 0):
             return result
         else:
+            time.sleep(JDRK_NORMAL_DELAY)
             for i_retry in range(0, RETRY_TIME):
                 result = func(self, *args, **kwargs)
                 time.sleep(JDRK_NORMAL_DELAY)
