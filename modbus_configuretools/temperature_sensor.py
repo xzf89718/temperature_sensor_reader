@@ -20,7 +20,7 @@ BAUDRATE = 1
 # For retry check
 RETRY_TIME = 10
 # Normal sleep
-JDRK_NORMAL_DELAY = 0.1
+JDRK_NORMAL_DELAY = 1
 
 
 class JDRKAddressConfig():

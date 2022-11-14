@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "modbus_configuretools_xzf8971"
-version = "1.4.0"
+version = "1.5.0"
 authors = [
   { name="Zifeng", email="zifeng.xu@foxmail.com" },
 ]

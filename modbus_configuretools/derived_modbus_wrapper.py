@@ -46,7 +46,6 @@ class PyModbusWrapper(ModbusWrapper):
         self._result = self._client.write_registers(
             address, list_of_values, slaveID)
 
-    @check_is_port_connected
     def CheckResult(self):
         if (isinstance(self._result, ModbusIOException)):
             mylogger.error("Modbus IOException occurs.")
