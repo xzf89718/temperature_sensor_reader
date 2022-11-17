@@ -3,7 +3,7 @@ This is a temperature sensor package designed for modbus. Implemented in pymodbu
 ## Install
 from pypi:  
 ```bash
-pip install temperature-sensor-readr-xzf8971  
+pip install temperature-sensor-reader-xzf8971  
 ```
 from github:  
 ```bahs
