@@ -1,9 +1,9 @@
 # temperature_sensor_reader
-This is a temperature sensor package designed for modbus. Implemented in pymodbus only. PyPI website: https://pypi.org/project/modbus-configuretools-xzf8971/
+This is a temperature sensor package designed for modbus. Implemented in pymodbus only. PyPI website: https://pypi.org/project/temperature-sensor-reader-xzf8971/
 ## Install
 from pypi:  
 ```bash
-pip install modbus-configuretools-xzf8971  
+pip install temperature-sensor-readr-xzf8971  
 ```
 from github:  
 ```bahs
