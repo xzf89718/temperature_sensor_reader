@@ -37,8 +37,8 @@ def makeCurve(X, Ys, legends, xlabel, ylabel, title, outfile="MUX64BatchTest.png
     fig.savefig(outfile)
     plt.close(fig=fig)
 
-def makeTemperatureAndHumidity(list_time, list_temp, list_humidity, title=None, outfile="temperature_humidity.png"):
-    fig, ax = plt.subplots(2, 1, figsize=(100, 30))
+def makeTemperatureAndHumidity(list_time, list_temp, list_humidity, figsize=(100, 30), title=None, outfile="temperature_humidity.png"):
+    fig, ax = plt.subplots(2, 1, figsize=figsize)
     # plot temperature at ax[0]
     ax[0].set_ylabel("Temperature/$^\circ$C")
     ax[0].set_xlim(list_time[0], list_time[-1])
