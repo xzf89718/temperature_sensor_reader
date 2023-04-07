@@ -56,7 +56,8 @@ class Graphtec():
                 channels_data.append(reading_list)
 
         # Append the data to the list
-        self.data.append(channels_data)
+        # self.data.append(channels_data)
+        self.data = [channels_data]
 
     # -----------------------------------
     def get_graphtec_idn(self):
@@ -113,12 +114,18 @@ class Graphtec():
 
 class GraphtecWithLogger(Graphtec):
 
-    def __init__(self, address, resource_manager):
+    def __init__(self, address, resource_manager, my_logger):
         super().__init__(address, resource_manager)
+        self.my_logger = my_logger
     
-    def append_graphtec_readings(self):
-        _data = super().append_graphtec_readings()()
-        print(_data)
+    def add_channel_data_to_df(self):
+        _df =  super().add_channel_data_to_df()
+        message = ""
+        for _CH in _df.columns.values:
+            message = message + "\t" + str(_CH) + str(_df[_CH][0])
+        self.my_logger.info(message)
+            
+
 
 def readFromGraphtec(port, time_interval, logfile_name):
     logger_wrapper = CustomLoggerWrapper(
@@ -130,11 +137,13 @@ def readFromGraphtec(port, time_interval, logfile_name):
     # Can be setup on Graphtec with "Menu > I/F > IP ADDRESS" (change with buttons)
     # ip_graphtec = "192.168.10.20"
     # Sometimes errors arise here if you can not connect, restarting the Graphtec or doing "Menu > I/F > Apply Setting" Sometimes helps. Also, try if you can visit the ip address in browser directly.
-    graphtec = GraphtecWithLogger(port, rm)
+    graphtec = GraphtecWithLogger(port, rm, mylogger)
 
     try:
         while True:
-            graphtec.append_graphtec_readings()  # Measure and append to data list
+            graphtec.append_graphtec_readings()
+            graphtec.add_channel_data_to_df()  # Measure and append to data list
+            # mylogger.info("")
             # Reading every 0.2 seconds
             time.sleep(time_interval)
     except KeyboardInterrupt as error:
