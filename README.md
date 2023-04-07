@@ -70,3 +70,9 @@ humidity = sensor.ReadTemperature(myconfig)
 ```python
 sensor.close()
 ```
+## Graphtec multichannel data logger
+### How to
+For a Graphtec reader with ip address 192.168.10.20 measure every 10 seconds, save all data to temperature.log
+```python
+python -m graphtec_reader -p 192.168.10.20 -t 10 -o temperature.log
+```
