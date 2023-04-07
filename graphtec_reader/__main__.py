@@ -20,5 +20,5 @@ if __name__ == "__main__":
     TIMEINTERVAL = args.time_interval
     OUTFILENAME = args.outfile_name
 
-    readFromGraphtec(port=PORT, time_interval=TIMEINTERVAL,
+    readFromGraphtec(port=PORT, time_interval=float(TIMEINTERVAL),
                      logfile_name=OUTFILENAME)
