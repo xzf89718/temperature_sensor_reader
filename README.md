@@ -58,7 +58,7 @@ sensor.InitClient()
 slaveID, baudrate = sensor.ReadSalveIDAndBaudrate(myconfig)  
 # Read temperature, dew point, humidity in one request  
 # Only correct for specified sensor
-temperature, dew_point_temperature, humidity = sensor.ReadTemperatureAndHumidity(myconfig)  
+# temperature, dew_point_temperature, humidity = sensor.ReadTemperatureAndHumidity(myconfig)  
 # Read temperature only  
 temperature = sensor.ReadTemperature(myconfig)  
 # Read dew point temperature  
